@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Хроники Ночи | Путеводитель по Миру Тьмы и Маркусу Кроу</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* ==========================================
+           DESIGN TOKENS & WORLD OF DARKNESS PALETTE
+           ========================================== */
         :root {
             --bg-deep: #070608;
-            --bg-card: #110e13;
-            --bg-card-hover: #19131c;
+            --bg-panel: #0d0a0f;
+            --bg-card: #120e15;
+            --bg-card-hover: #1a131e;
             --crimson-dark: #4a0710;
             --crimson-main: #8c0d1e;
             --crimson-bright: #d1152e;
-            --gold-muted: #9e8561;
-            --text-main: #e6dfd5;
-            --text-muted: #9c9288;
-            --border-subtle: rgba(140, 13, 30, 0.35);
+            --crimson-glow: rgba(209, 21, 46, 0.35);
+            --gold-muted: #a68b65;
+            --gold-bright: #c8aa7e;
+            --text-main: #e8e1d7;
+            --text-muted: #a3988e;
+            --border-subtle: rgba(140, 13, 30, 0.38);
+            --border-gold: rgba(166, 139, 101, 0.3);
         }
 
         * {
@@ -35,59 +44,62 @@
             background-color: var(--bg-deep);
             color: var(--text-main);
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.7;
+            line-height: 1.75;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 20%, rgba(140, 13, 30, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(74, 7, 16, 0.18) 0%, transparent 45%),
-                linear-gradient(180deg, #050406 0%, #0c090d 50%, #050406 100%);
+                radial-gradient(circle at 12% 15%, rgba(140, 13, 30, 0.14) 0%, transparent 40%),
+                radial-gradient(circle at 88% 45%, rgba(74, 7, 16, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 20% 80%, rgba(140, 13, 30, 0.12) 0%, transparent 40%),
+                linear-gradient(180deg, #050406 0%, #0c090e 50%, #050406 100%);
         }
 
-        /* Subtle Noir Film Grain & Vignette */
+        /* Noir Vignette Overlay */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             pointer-events: none;
-            box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.9);
-            z-index: 999;
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.92);
+            z-index: 998;
         }
 
         /* Top Blood Drip SVG Decoration */
         .blood-drip-top {
             width: 100%;
-            height: 48px;
+            height: 54px;
             fill: var(--crimson-dark);
             display: block;
-            opacity: 0.85;
-            filter: drop-shadow(0 4px 12px rgba(209, 21, 46, 0.25));
+            opacity: 0.9;
+            filter: drop-shadow(0 5px 14px rgba(209, 21, 46, 0.3));
         }
 
-        /* Navigation */
+        /* ==========================================
+           NAVIGATION BAR
+           ========================================== */
         nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             background: rgba(7, 6, 8, 0.92);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border-subtle);
             padding: 14px 24px;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 16px;
         }
 
         .brand {
             font-family: 'Cinzel', serif;
             font-weight: 900;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             letter-spacing: 3px;
             color: var(--text-main);
             text-decoration: none;
@@ -102,52 +114,56 @@
 
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 22px;
             list-style: none;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            font-weight: 500;
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--crimson-bright);
-            text-shadow: 0 0 10px rgba(209, 21, 46, 0.6);
+            text-shadow: 0 0 12px var(--crimson-glow);
         }
 
-        /* Hero Section */
+        /* ==========================================
+           HERO & INTRO CALLOUT
+           ========================================== */
         header.hero {
             position: relative;
-            padding: 90px 24px 80px;
+            padding: 80px 24px 50px;
             text-align: center;
-            max-width: 1000px;
+            max-width: 1040px;
             margin: 0 auto;
         }
 
         .vinyl-badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 6px 18px;
+            gap: 12px;
+            padding: 7px 20px;
             border: 1px solid var(--border-subtle);
             border-radius: 50px;
-            background: rgba(140, 13, 30, 0.1);
-            font-size: 0.78rem;
-            letter-spacing: 2px;
+            background: rgba(140, 13, 30, 0.12);
+            font-size: 0.76rem;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: var(--gold-muted);
-            margin-bottom: 24px;
+            color: var(--gold-bright);
+            margin-bottom: 26px;
         }
 
         .vinyl-icon {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             border: 2px solid var(--crimson-bright);
             position: relative;
@@ -156,9 +172,9 @@
 
         .vinyl-icon::after {
             content: "";
-            width: 4px;
-            height: 4px;
-            background: var(--gold-muted);
+            width: 5px;
+            height: 5px;
+            background: var(--gold-bright);
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -172,14 +188,14 @@
 
         h1.hero-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.6rem, 6vw, 4.5rem);
+            font-size: clamp(2.5rem, 6vw, 4.4rem);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 4px;
-            line-height: 1.1;
-            margin-bottom: 20px;
+            line-height: 1.12;
+            margin-bottom: 18px;
             color: #fff;
-            text-shadow: 0 4px 30px rgba(140, 13, 30, 0.7);
+            text-shadow: 0 4px 35px rgba(140, 13, 30, 0.75);
         }
 
         h1.hero-title span {
@@ -188,40 +204,74 @@
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 720px;
-            margin: 0 auto 36px;
-            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+            color: var(--gold-bright);
+            max-width: 820px;
+            margin: 0 auto 34px;
+            font-style: italic;
+        }
+
+        /* Word Doc Styled Callout Box */
+        .callout-box {
+            background: linear-gradient(135deg, rgba(140, 13, 30, 0.18) 0%, rgba(18, 14, 21, 0.95) 100%);
+            border: 1px solid var(--crimson-main);
+            border-left: 5px solid var(--crimson-bright);
+            border-radius: 6px;
+            padding: 26px 32px;
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75);
+        }
+
+        .callout-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .callout-box p {
+            font-size: 0.98rem;
+            color: var(--text-main);
         }
 
         .rose-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
-            margin: 40px auto;
-            color: var(--crimson-main);
+            gap: 18px;
+            margin: 44px auto;
+            color: var(--crimson-bright);
+            font-size: 1.25rem;
         }
 
         .rose-divider::before,
         .rose-divider::after {
             content: "";
             height: 1px;
-            width: 120px;
+            width: 140px;
             background: linear-gradient(90deg, transparent, var(--crimson-main), transparent);
         }
 
-        /* Layout Containers */
+        /* ==========================================
+           CONTAINERS & TYPOGRAPHY
+           ========================================== */
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 45px 24px;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 48px;
         }
 
         .section-tag {
@@ -231,27 +281,93 @@
             text-transform: uppercase;
             font-weight: 600;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4.2vw, 3.1rem);
             color: #fff;
             letter-spacing: 2px;
             text-transform: uppercase;
+            line-height: 1.2;
         }
 
-        /* Dictionary & Lore Cards */
+        .prose-block {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 36px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .prose-block p {
+            font-size: 1.02rem;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .prose-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .prose-highlight {
+            color: var(--gold-bright);
+            font-weight: 600;
+        }
+
+        .setting-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 22px;
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .pillar-item {
+            background: rgba(18, 14, 21, 0.8);
+            border: 1px solid rgba(166, 139, 101, 0.22);
+            padding: 22px;
+            border-radius: 5px;
+        }
+
+        .pillar-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: var(--gold-bright);
+            margin-bottom: 8px;
+        }
+
+        .pillar-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* ==========================================
+           DICTIONARY / GLOSSARY CARDS
+           ========================================== */
+        .sub-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            margin: 45px 0 28px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 24px;
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
         }
 
@@ -259,7 +375,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             padding: 28px;
-            border-radius: 4px;
+            border-radius: 6px;
             position: relative;
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
@@ -273,13 +389,13 @@
             width: 3px;
             height: 100%;
             background: var(--crimson-main);
-            transition: width 0.3s ease, background 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .noir-card:hover {
             transform: translateY(-4px);
             border-color: var(--crimson-bright);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(140, 13, 30, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75), 0 0 22px rgba(140, 13, 30, 0.22);
             background: var(--bg-card-hover);
         }
 
@@ -289,58 +405,64 @@
 
         .noir-card h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.55rem;
             color: #fff;
             margin-bottom: 10px;
             display: flex;
-            align-items: center;
-            gap: 10px;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .noir-card h3 span.term-en {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--gold-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 400;
+            letter-spacing: 1.2px;
+            font-weight: 500;
         }
 
         .noir-card p {
             font-size: 0.94rem;
-            color: var(--text-muted);
+            color: var(--text-main);
         }
 
-        /* HUD / Stats Showcase */
+        /* ==========================================
+           MASQUERADE & HUD SHOWCASE
+           ========================================== */
         .hud-showcase {
-            background: linear-gradient(135deg, #120b10 0%, #09070a 100%);
+            background: linear-gradient(135deg, #130b11 0%, #09070b 100%);
             border: 1px solid var(--crimson-main);
             border-radius: 6px;
             padding: 36px;
-            margin-top: 30px;
+            margin-top: 32px;
             display: grid;
-            grid-template-columns: 1fr 1.3fr;
+            grid-template-columns: 1fr 1.35fr;
             gap: 36px;
             align-items: center;
-            box-shadow: 0 0 40px rgba(140, 13, 30, 0.15);
+            box-shadow: 0 0 40px rgba(140, 13, 30, 0.16);
         }
 
-        @media (max-width: 820px) {
+        @media (max-width: 860px) {
             .hud-showcase {
                 grid-template-columns: 1fr;
+                padding: 24px;
             }
         }
 
         .terminal-box {
             background: #050406;
-            border: 1px solid rgba(209, 21, 46, 0.4);
+            border: 1px solid rgba(209, 21, 46, 0.45);
             padding: 24px;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: #e6dfd5;
-            border-radius: 4px;
-            line-height: 1.6;
-            box-shadow: inset 0 0 20px rgba(140, 13, 30, 0.2);
+            border-radius: 5px;
+            line-height: 1.65;
+            box-shadow: inset 0 0 25px rgba(140, 13, 30, 0.22);
+            overflow-x: auto;
         }
 
         .terminal-box .hl-red {
@@ -349,10 +471,78 @@
         }
 
         .terminal-box .hl-gold {
-            color: var(--gold-muted);
+            color: var(--gold-bright);
+            font-weight: bold;
         }
 
-        /* Clans Grid & Interactive Filter */
+        .stat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .stat-item {
+            background: rgba(7, 6, 8, 0.65);
+            border-left: 3px solid var(--crimson-bright);
+            padding: 14px 18px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .stat-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .stat-item p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           FACTION TABLE & CARDS
+           ========================================== */
+        .faction-table-wrap {
+            overflow-x: auto;
+            margin-top: 32px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            background: var(--bg-panel);
+        }
+
+        table.faction-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 680px;
+        }
+
+        table.faction-table th {
+            background: rgba(140, 13, 30, 0.25);
+            color: #fff;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--crimson-main);
+        }
+
+        table.faction-table td {
+            padding: 20px 22px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.93rem;
+            vertical-align: top;
+        }
+
+        table.faction-table tr:hover td {
+            background: rgba(140, 13, 30, 0.06);
+        }
+
+        /* ==========================================
+           CLANS ENCYCLOPEDIA & FILTER
+           ========================================== */
         .filter-bar {
             display: flex;
             justify-content: center;
@@ -362,17 +552,17 @@
         }
 
         .filter-btn {
-            background: rgba(17, 14, 19, 0.9);
+            background: rgba(18, 14, 21, 0.9);
             border: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            padding: 10px 20px;
+            padding: 10px 22px;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.82rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.25s ease;
-            border-radius: 3px;
+            border-radius: 4px;
         }
 
         .filter-btn:hover,
@@ -380,12 +570,12 @@
             background: var(--crimson-main);
             color: #fff;
             border-color: var(--crimson-bright);
-            box-shadow: 0 0 15px rgba(209, 21, 46, 0.4);
+            box-shadow: 0 0 16px rgba(209, 21, 46, 0.45);
         }
 
         .clan-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
             gap: 28px;
         }
 
@@ -411,7 +601,7 @@
         .clan-card:hover {
             border-color: var(--crimson-bright);
             transform: translateY(-5px);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(140, 13, 30, 0.25);
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.85), 0 0 25px rgba(140, 13, 30, 0.25);
         }
 
         .clan-header {
@@ -420,21 +610,20 @@
             gap: 18px;
             margin-bottom: 20px;
             padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Placeholder for Custom Clan Emblem (SVG / Image Ready) */
         .clan-icon-slot {
             width: 64px;
             height: 64px;
             min-width: 64px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(140, 13, 30, 0.35) 0%, rgba(10, 8, 12, 0.95) 100%);
+            background: radial-gradient(circle, rgba(140, 13, 30, 0.38) 0%, rgba(10, 8, 12, 0.95) 100%);
             border: 1px solid var(--crimson-main);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(140, 13, 30, 0.4);
+            box-shadow: 0 0 16px rgba(140, 13, 30, 0.45);
             overflow: hidden;
         }
 
@@ -454,77 +643,106 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.75rem;
             color: #fff;
-            line-height: 1.1;
+            line-height: 1.15;
             letter-spacing: 1px;
         }
 
         .clan-epithet {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--gold-muted);
+            letter-spacing: 1.4px;
+            color: var(--gold-bright);
             display: block;
             margin-top: 4px;
         }
 
         .clan-body p {
-            font-size: 0.92rem;
+            font-size: 0.93rem;
             color: var(--text-main);
             margin-bottom: 14px;
         }
 
         .clan-meta {
-            background: rgba(5, 4, 6, 0.65);
+            background: rgba(5, 4, 6, 0.7);
             border-left: 2px solid var(--crimson-bright);
-            padding: 12px 14px;
+            padding: 12px 15px;
             margin: 12px 0;
-            font-size: 0.85rem;
+            font-size: 0.86rem;
+            border-radius: 0 4px 4px 0;
         }
 
         .clan-meta strong {
             color: var(--crimson-bright);
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             letter-spacing: 1px;
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .clan-npcs {
             margin-top: 16px;
             padding-top: 14px;
-            border-top: 1px dashed rgba(158, 133, 97, 0.3);
+            border-top: 1px dashed rgba(166, 139, 101, 0.35);
             font-size: 0.85rem;
         }
 
         .clan-npcs strong {
-            color: var(--gold-muted);
+            color: var(--gold-bright);
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
         }
 
         .npc-tag {
             display: inline-block;
-            background: rgba(140, 13, 30, 0.2);
-            border: 1px solid rgba(140, 13, 30, 0.5);
+            background: rgba(140, 13, 30, 0.22);
+            border: 1px solid rgba(140, 13, 30, 0.55);
             color: #fff;
-            padding: 3px 10px;
-            border-radius: 3px;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 0.78rem;
             margin: 3px 4px 3px 0;
         }
 
-        /* Marcus Crow Feature Dossier */
+        /* ==========================================
+           MARCUS CROW DOSSIER & PLOT START
+           ========================================== */
+        .plot-intro-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+            padding: 32px 36px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .plot-intro-box p {
+            font-size: 1.08rem;
+            color: var(--text-main);
+            max-width: 900px;
+            margin: 0 auto 14px;
+        }
+
+        .plot-intro-box .dramatic-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.65rem;
+            color: var(--crimson-bright);
+            font-style: italic;
+            font-weight: 700;
+            margin-top: 16px;
+            display: block;
+        }
+
         .marcus-dossier {
-            background: linear-gradient(145deg, #140d12 0%, #080609 100%);
+            background: linear-gradient(145deg, #150d13 0%, #08060a 100%);
             border: 1px solid var(--crimson-main);
             border-radius: 6px;
             padding: 44px;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.88);
         }
 
         @media (max-width: 640px) {
@@ -536,10 +754,10 @@
         .dossier-grid {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
-            gap: 36px;
+            gap: 38px;
         }
 
-        @media (max-width: 860px) {
+        @media (max-width: 900px) {
             .dossier-grid {
                 grid-template-columns: 1fr;
             }
@@ -552,7 +770,10 @@
             color: #fff;
             border-left: 3px solid var(--crimson-bright);
             padding-left: 20px;
-            margin: 24px 0;
+            margin: 24px 0 0;
+            background: rgba(140, 13, 30, 0.08);
+            padding: 16px 20px;
+            border-radius: 0 4px 4px 0;
         }
 
         /* Footer */
@@ -561,31 +782,33 @@
             padding: 60px 24px;
             border-top: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.86rem;
             margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Decorative Blood Drip Header SVG -->
+    <!-- Top Blood Drip SVG Decoration -->
     <svg class="blood-drip-top" viewBox="0 0 1440 60" preserveAspectRatio="none">
         <path d="M0,0 L1440,0 L1440,15 C1380,15 1360,45 1340,45 C1320,45 1300,12 1250,12 C1200,12 1190,55 1170,55 C1150,55 1140,18 1080,18 C1020,18 1000,35 980,35 C960,35 940,10 880,10 C820,10 810,58 790,58 C770,58 760,15 700,15 C640,15 620,40 600,40 C580,40 560,12 490,12 C420,12 410,50 390,50 C370,50 350,14 280,14 C210,14 200,42 180,42 C160,42 140,10 80,10 C40,10 20,28 0,28 Z"></path>
     </svg>
 
+    <!-- Sticky Navigation -->
     <nav>
         <div class="nav-container">
             <a href="#" class="brand">VAMPIRE <span>//</span> CROW CHRONICLES</a>
             <ul class="nav-links">
-                <li><a href="#world">Мир Тьмы</a></li>
-                <li><a href="#mechanics">Маскарад и Статы</a></li>
-                <li><a href="#factions">Фракции</a></li>
-                <li><a href="#clans">Кланы и НПС</a></li>
-                <li><a href="#marcus">Маркус Кроу</a></li>
+                <li><a href="#world">1. Мир Тьмы и Словарь</a></li>
+                <li><a href="#mechanics">2. Маскарад и Статы</a></li>
+                <li><a href="#factions">3. Фракции</a></li>
+                <li><a href="#clans">4. Кланы и НПС</a></li>
+                <li><a href="#marcus">5. Маркус Кроу и Старт</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <header class="hero">
         <div class="vinyl-badge">
             <div class="vinyl-icon"></div>
@@ -593,149 +816,282 @@
         </div>
         <h1 class="hero-title">Добро пожаловать в <span>Мир Тьмы</span></h1>
         <p class="hero-subtitle">
-            Интерактивный путеводитель для игроков. Не нужно знать сотни книг по <em>Vampire: The Masquerade</em> — здесь собрано всё, чтобы шагнуть в залитый дождем и кровью мегаполис Маркуса Кроу.
+            Путеводитель для игроков по вселенной Vampire: The Masquerade и миру Маркуса Кроу
         </p>
+
+        <!-- Word Doc Intro Callout -->
+        <div class="callout-box">
+            <h4>🩸 Для тех, кто никогда не играл в Vampire: The Masquerade (VtM)</h4>
+            <p>
+                Не нужно учить сотни страниц лора, чтобы начать игру! Эта статья за 5 минут объяснит тебе главные правила ночного города, кем являются вампиры, какие вокруг плетутся интриги и кем в этой истории можешь стать именно ты.
+            </p>
+        </div>
+
         <div class="rose-divider">🌹</div>
     </header>
 
-    <!-- SECTION 1: WORLD & GLOSSARY -->
+    <!-- ==========================================
+         SECTION 1: ЧТО ТАКОЕ МИР ТЬМЫ И КТО ТАКИЕ СОРОДИЧИ?
+         ========================================== -->
     <section id="world" class="container">
         <div class="section-header">
-            <span class="section-tag">Акт I // Основы лора</span>
-            <h2 class="section-title">Как устроен ночной город</h2>
-            <p style="color: var(--text-muted); max-width: 760px; margin: 12px auto 0;">
-                Мир Тьмы выглядит точь-в-точь как наша современность, но сквозь черное стекло: за советами директоров, закрытыми ночными клубами, моргом и портовыми доками стоят бессмертные хищники, называющие себя <strong>Сородичами (Kindred)</strong>.
-            </p>
+            <span class="section-tag">Раздел I // Сеттинг и Основы Лора</span>
+            <h2 class="section-title">1. Что такое Мир Тьмы и кто такие Сородичи?</h2>
         </div>
+
+        <div class="prose-block">
+            <p>
+                <span class="prose-highlight">Мир Тьмы (World of Darkness)</span> — это отражение нашей современной реальности, увиденное сквозь темное, залитое неоном и дождем стекло. Здесь стоят те же небоскребы, работают те же банки, полиция и ночные клубы, но в тенях мегаполисов правят бессмертные хищники — вампиры, которые называют себя <strong>«Сородичами» (Kindred)</strong> или <strong>«Каинитами»</strong>.
+            </p>
+            <p>
+                Забудь о сказочных графах в пыльных замках и боязни чеснока. Современные вампиры контролируют хедж-фонды, медиаимперии, уличные банды и криминальные синдикаты. Их главная валюта — не только деньги, но и кровь, информация и долги чести.
+            </p>
+            <p>
+                Эстетика этого сеттинга называется <strong>готик-панк и нео-нуар</strong>. Наш мир глубже, контрастнее и опаснее обычного: вершины стеклянных небоскребов, где в кашемировых костюмах заключаются многомиллионные сделки, нависают над гниющими портовыми доками, заброшенными станциями метро и подпольными рейвами. Каждая ночь здесь — это баланс между политическим триллером, соблазном власти и личной драмой существа, которое отчаянно пытается сохранить осколки человеческой души.
+            </p>
+
+            <!-- Expanded Setting Pillars -->
+            <div class="setting-pillars">
+                <div class="pillar-item">
+                    <h4>☀️ Физиология и Смерть</h4>
+                    <p>
+                        Вампиры клинически мертвы: их сердца не бьются, тела холодны (хотя они могут имитировать тепло и дыхание с помощью притока крови), а обычная еда обращается во рту пеплом. Кресты и чеснок — сказки для людей. Но <strong>солнечный свет и открытый огонь</strong> сжигают вампира за секунды, отсечение головы убивает окончательно, а деревянный кол в сердце не убивает, но погружает в каменный паралич (торпор).
+                    </p>
+                </div>
+                <div class="pillar-item">
+                    <h4>🩸 Поцелуй и Охота</h4>
+                    <p>
+                        Укус вампира называется <strong>«Поцелуем»</strong>. Он не причиняет смертному боли — наоборот, слюна сородича погружает жертву в состояние наркотического, почти интимного экстаза, стирая кратковременную память о моменте укуса. Если зализать ранку на шее после укуса, на коже не останется даже следа от клыков, а жертва спишет легкую слабость на бокал лишнего вина.
+                    </p>
+                </div>
+                <div class="pillar-item">
+                    <h4>♟️ Война Поколений</h4>
+                    <p>
+                        Власть в городе держится на вечном конфликте «отцов и детей». Древние Старейшины (которым по 100–300 лет) прибрали к рукам лучшие охотничьи угодья, банки и суды, используя молодых вампиров-Неонатов как пешек. Неонаты же лучше понимают цифровую эпоху, даркнет и современное оружие, мечтая скинуть стариков с их золоченых тронов.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="sub-heading">Базовый словарь ночного города (Сленг вампиров)</h3>
 
         <div class="grid-3">
             <div class="noir-card">
-                <h3>Становление <span class="term-en">The Embrace</span></h3>
-                <p>Ритуал обращения смертного в вампира. Сир («родитель») обязан выпить жертву досуха, до самой остановки сердца, и влить в остывающие губы каплю собственной проклятой крови (витэ). Обращать без разрешения Князя города — преступление, караемое смертью.</p>
+                <h3>Становление (Обращение) <span class="term-en">The Embrace</span></h3>
+                <p>
+                    Ритуал превращения человека в вампира. Чтобы создать потомка, вампир должен выпить человека досуха, до самой остановки сердца, и влить в его умирающее тело каплю собственной проклятой крови (витэ). Обращать без разрешения Князя города — преступление, караемое смертью.
+                </p>
             </div>
+
             <div class="noir-card">
-                <h3>Внутренний Зверь <span class="term-en">The Beast</span></h3>
-                <p>Первобытный хищник, живущий в душе каждого вампира. Он не знает жалости — только голод, ярость и страх огня. Если вампир слишком голоден или загнан в угол, Зверь перехватывает контроль (наступает <strong>Безумие / Frenzy</strong>), заставляя рвать всех подряд.</p>
+                <h3>Сир и Дитя (Птенец) <span class="term-en">Sire &amp; Childe</span></h3>
+                <p>
+                    <strong>Сир</strong> — это твой «родитель»-вампир, который дал тебе Становление и передал проклятие своего клана. <strong>Дитя (Птенец или Неонат)</strong> — недавно обращенный молодой вампир, только осваивающийся в законах ночи и еще помнящий вкус смертной жизни.
+                </p>
             </div>
+
+            <div class="noir-card">
+                <h3>Зверь и Голод <span class="term-en">The Beast &amp; Hunger</span></h3>
+                <p>
+                    Внутри каждого вампира живет Зверь — первобытный инстинкт хищника, жаждущий крови и разрушения. Если вампир долго не пьет кровь или испытывает сильный ужас/гнев, Зверь перехватывает контроль (наступает <strong>Безумие / Frenzy</strong>), превращая аристократа в слепое чудовище.
+                </p>
+            </div>
+
             <div class="noir-card">
                 <h3>Узы Крови <span class="term-en">Blood Bond</span></h3>
-                <p>Главная ловушка вампирского общества. Тот, кто трижды в три разные ночи выпьет кровь одного вампира, попадает в абсолютное психическое рабство: жертва испытывает болезненную одержимость своим «регентом» и теряет способность идти против его воли.</p>
+                <p>
+                    Самая страшная ловушка вампирского мира. Если выпить кровь одного и того же вампира трижды в три разные ночи, ты попадешь в абсолютное эмоциональное и психологическое рабство к нему — будешь любить и ненавидеть своего хозяина до потери воли.
+                </p>
             </div>
+
             <div class="noir-card">
-                <h3>Гули <span class="term-en">Ghouls</span></h3>
-                <p>Смертные слуги, которым вампир регулярно дает каплю своей крови без обращения. Они не стареют, обладают сверхчеловеческой выносливостью, охраняют своих хозяев днем при солнечном свете и сидят на плотной игле Уз Крови.</p>
+                <h3>Гуль <span class="term-en">Ghoul</span></h3>
+                <p>
+                    Человек (смертный), которому вампир регулярно дает пить свою кровь без обращения. Гули не стареют, обладают сверхчеловеческой силой, служат вампирам днем при солнечном свете и фанатично привязаны к ним Узами Крови.
+                </p>
             </div>
+
             <div class="noir-card">
                 <h3>Элизиум <span class="term-en">Elysium</span></h3>
-                <p>Священная нейтральная зона (в нашем городе — <strong>Гранд-Опера «Орфей»</strong>), где вампиры собираются на приемы и суды. Любое насилие, обнажение клыков или применение магии крови в стенах Элизиума карается немедленной казнью.</p>
+                <p>
+                    Нейтральная территория для светских раутов и судов вампиров (в нашем городе — <strong>Гранд-Опера «Орфей»</strong>), где под страхом окончательной смерти запрещено любое насилие, обнажение клыков и применение сверхспособностей.
+                </p>
             </div>
-            <div class="noir-card">
-                <h3>Престация <span class="term-en">Prestation</span></h3>
-                <p>Экономика долгов чести. Вампиры не помогают друг другу бесплатно: каждая услуга регистрируется при дворе Гарпией как Мелкий, Большой или Жизненный Долг. Именно такой долг связывает тебя с Маркусом Кроу на старте истории.</p>
+
+            <div class="noir-card" style="grid-column: 1 / -1;">
+                <h3>Престация (Долги чести) <span class="term-en">Prestation</span></h3>
+                <p>
+                    У вампиров не принято верить на слово или помогать по доброте душевной. Любая серьезная помощь оформляется и регистрируется при дворе Гарпией как официальный Долг (Мелкий, Большой или Долг Жизни). Нарушить долг — значит стать изгоем для всего города. Именно такой Большой Долг связывает тебя с Маркусом Кроу на старте истории.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: MASQUERADE & HUD MECHANICS -->
+    <!-- ==========================================
+         SECTION 2: ГЛАВНЫЙ ЗАКОН ВЫЖИВАНИЯ: МАСКАРАД И СТАТЫ
+         ========================================== -->
     <section id="mechanics" class="container">
         <div class="section-header">
-            <span class="section-tag">Акт II // Правила выживания</span>
-            <h2 class="section-title">Железный Маскарад и Хроника Ночи</h2>
-        </div>
-
-        <div class="hud-showcase">
-            <div class="terminal-box">
-                ╭─── 🌃 <span class="hl-red">ХРОНИКА НОЧИ</span> ───────────────────<br>
-                │ 📅 Дата: Пятница, 14 ноября | 🕰️ Время: 01:15<br>
-                │ 📍 Локация: Переулок у Гранд-Оперы «Орфей»<br>
-                ├───────────────────────────────────────<br>
-                │ 🎭 <span class="hl-gold">Маскарад:</span> [5/5] — Тень не потревожена<br>
-                │ 🩸 <span class="hl-red">Голод:</span> [2/5] — Тихий шепот в венах<br>
-                │ ⚖️ <span class="hl-gold">Человечность:</span> [7/10] — Дыхание по привычке<br>
-                ╰───────────────────────────────────────
-            </div>
-            <div>
-                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; margin-bottom: 14px; color: #fff;">
-                    Как работают твои показатели в игре:
-                </h3>
-                <p style="margin-bottom: 14px; color: var(--text-muted);">
-                    <strong>🎭 Маскарад [0–5]:</strong> Смертные не должны знать, что вампиры существуют. Если ты используешь способности под камерами, оставляешь трупы или выдаешь себя — счетчик падает. На <strong>3/5</strong> по твоему следу идут продажный детектив Миллер и ищейки Шерифа; на <strong>1/5</strong> Маркусу приходится высылать бойцов «Эгиды» для зачистки; на <strong>0/5</strong> Князь объявляет на тебя <em>Кровавую Охоту</em>.
-                </p>
-                <p style="margin-bottom: 14px; color: var(--text-muted);">
-                    <strong>🩸 Голод [0–5]:</strong> Твоя жажда крови. Растет с каждым часом, при исцелении ран и использовании вампирских Дисциплин. На <strong>4/5</strong> любой запах крови может сорвать резьбу, а на <strong>5/5</strong> твой Зверь берет верх. Чтобы опустить Голод до 0/5, придется выпить человека до смерти.
-                </p>
-                <p style="color: var(--text-muted);">
-                    <strong>⚖️ Человечность [0–10]:</strong> Твой моральный компас. Падает за хладнокровные убийства невинных и жестокость. Чем ниже Человечность, тем меньше в тебе от живого человека и тем страшнее твой Зверь.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: FACTIONS -->
-    <section id="factions" class="container">
-        <div class="section-header">
-            <span class="section-tag">Акт III // Политическая карта</span>
-            <h2 class="section-title">Фракции ночного мегаполиса</h2>
-            <p style="color: var(--text-muted); max-width: 720px; margin: 10px auto 0;">
-                У тебя полная свобода передвижения: ты можешь хранить верность корпоративной башне Маркуса, тайно сливать информацию уличным бунтарям или торговаться с независимыми кланами.
+            <span class="section-tag">Раздел II // Законы и Механика Игры</span>
+            <h2 class="section-title">2. Главный закон выживания: Маскарад и Статы</h2>
+            <p style="color: var(--text-main); max-width: 820px; margin: 16px auto 0; font-size: 1.02rem;">
+                В средние века вампиры правили людьми открыто, пока Инквизиция не начала сжигать их сотнями. Чтобы выжить в эпоху смартфонов, камер наблюдения и спецслужб, вампиры создали Железный Закон — <strong>Маскарад</strong>.
             </p>
         </div>
 
-        <div class="grid-2">
-            <div class="noir-card">
-                <h3>Камарилья <span class="term-en">Башня из слоновой кости</span></h3>
-                <p>Элитарная неофеодальная секта, контролирующая большой бизнес, мэрию, полицию и высотки центра. Здесь правят древние старейшины, жесткая иерархия и фанатичное соблюдение Маскарада. Считают себя единственными цивилизованными хозяевами ночи.</p>
-                <div class="clan-npcs">
-                    <strong>Ключевые лица в городе:</strong>
-                    <span class="npc-tag">Князь Себастьян Делакруа</span>
-                    <span class="npc-tag">Сенешаль Эвелин Росс</span>
-                    <span class="npc-tag">Шериф Вальтер «Гончая» Краузе</span>
-                    <span class="npc-tag">Гарпия Селеста Моро</span>
-                    <span class="npc-tag">Маркус Кроу</span>
+        <!-- Word Doc Masquerade Callout -->
+        <div class="callout-box" style="margin-bottom: 36px;">
+            <h4>🎭 ГЛАВНОЕ ПРАВИЛО: МАСКАРАД</h4>
+            <p>
+                Смертные <strong>НЕ ДОЛЖНЫ</strong> знать о существовании вампиров. Если ты показываешь клыки на публике, используешь сверхспособности под камерами, оставляешь обескровленные трупы на улицах или болтаешь лишнее — ты нарушаешь Маскарад. За грубое нарушение Князь города объявляет <strong>Кровавую Охоту</strong>: каждому вампиру разрешено (и приказано) выследить и уничтожить тебя.
+            </p>
+        </div>
+
+        <p style="text-align: center; color: var(--gold-bright); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 10px;">
+            В начале каждого сообщения бот показывает твою панель состояния («Хроника Ночи»), где отслеживаются три жизненно важных показателя:
+        </p>
+
+        <div class="hud-showcase">
+            <div>
+                <div class="terminal-box">
+                    ╭─── 🌃 <span class="hl-red">ХРОНИКА НОЧИ</span> ───────────────────<br>
+                    │ 📅 Дата: Пятница, 14 ноября | 🕰️ Время: 01:15<br>
+                    │ 📍 Локация: Переулок у Гранд-Оперы «Орфей»<br>
+                    ├───────────────────────────────────────<br>
+                    │ 🎭 <span class="hl-gold">Маскарад:</span> [5/5] — Тень не потревожена<br>
+                    │ 🩸 <span class="hl-red">Голод:</span> [2/5] — Тихий шепот в венах<br>
+                    │ ⚖️ <span class="hl-gold">Человечность:</span> [7/10] — Дыхание по привычке<br>
+                    ╰───────────────────────────────────────
+                </div>
+                <div class="terminal-box" style="margin-top: 16px; border-color: rgba(166, 139, 101, 0.45);">
+                    ╭─── 📜 <span class="hl-gold">КОНТРАКТ НОЧИ: [Предложено]</span> ────<br>
+                    │ 👤 Заказчик: Маркус Кроу (Вентру)<br>
+                    │ 🎯 Задача: Выяснить источник утечки в клинике<br>
+                    │ ⚠️ Условие: Сделать тихо, без трупов до утра<br>
+                    │ 💎 Награда: Списание части долга чести<br>
+                    ╰───────────────────────────────────────
                 </div>
             </div>
 
-            <div class="noir-card">
-                <h3>Движение Анархов <span class="term-en">Свободные улицы и доки</span></h3>
-                <p>Бунтари, идеалисты и уличные хищники, пославшие к черту тиранию Князя. Они держат портовые доки «Восточный Пирс», рабочие окраины и подпольные техно-рейвы. Ведут открытую войну против корпораций Маркуса Кроу, которые скупают их кварталы под снос.</p>
-                <div class="clan-npcs">
-                    <strong>Ключевые лица в городе:</strong>
-                    <span class="npc-tag">Барон Реймонд «Рэй» Варгас</span>
-                    <span class="npc-tag">Рокси «Искра» Чен</span>
-                    <span class="npc-tag">Данте «Пес» Моралес</span>
-                    <span class="npc-tag">Лукас «Люк» Торн (в бегах)</span>
+            <div class="stat-list">
+                <div class="stat-item">
+                    <h4>🎭 Маскарад [от 0 до 5]</h4>
+                    <p>
+                        Твой уровень конспирации. На старте — <strong>5/5</strong>. Каждая грубая выходка при свидетелях снижает его. При <strong>3/5</strong> тобой заинтересуется продажная полиция (детектив Миллер) и Шериф Краузе; при <strong>1/5</strong> Маркусу Кроу придется бросить свою частную армию («Эгида Секьюрити») на зачистку твоих следов; при <strong>0/5</strong> за тобой придут убийцы Кровавой Охоты.
+                    </p>
                 </div>
-            </div>
 
-            <div class="noir-card">
-                <h3>Стая Шабаша <span class="term-en">Меч Каина</span></h3>
-                <p>Кровавый апокалиптический культ, засевший в заброшенном мясокомбинате «Харвест» на границе промзоны. Они презирают Маскарад, считают смертных просто скотом и лепят из бродяг изуродованных боевых монстров, готовя серию терактов против Камарильи.</p>
-                <div class="clan-npcs">
-                    <strong>Ключевые лица в городе:</strong>
-                    <span class="npc-tag">Епископ Мать Инесса</span>
-                    <span class="npc-tag">Гидеон «Проповедник»</span>
+                <div class="stat-item">
+                    <h4>🩸 Голод [от 0 до 5]</h4>
+                    <p>
+                        Насколько сильна твоя жажда крови. Растет от времени, ранений и использования вампирской магии (Дисциплин). На <strong>3/5</strong> ты слышишь стук чужих сердец; на <strong>4/5</strong> любая провокация грозит срывом; на <strong>5/5</strong> твой Зверь вырывается наружу. Снижается охотой и питьем крови (но чтобы утолить голод до <strong>0/5</strong>, придется убить жертву досуха).
+                    </p>
                 </div>
-            </div>
 
-            <div class="noir-card">
-                <h3>Независимые и Наемники <span class="term-en">Серые кардиналы</span></h3>
-                <p>Силы, стоящие над схваткой Камарильи и Анархов. Они предоставляют нейтральную почву для переговоров, отмывают грязные деньги через офшоры, торгуют призраками и принимают заказы на ликвидацию сородичей.</p>
-                <div class="clan-npcs">
-                    <strong>Ключевые лица в городе:</strong>
-                    <span class="npc-tag">Кассиан Вейн (Аукцион «Вейн и Сыновья»)</span>
-                    <span class="npc-tag">Лейла аль-Рашид (Судья-киллер)</span>
+                <div class="stat-item">
+                    <h4>⚖️ Человечность [от 0 до 10]</h4>
+                    <p>
+                        Твоя связь с прежней человеческой душой. Снижается, если ты убиваешь невинных людей и ведешь себя как бездушный монстр. Чем ниже Человечность, тем сильнее в тебе Зверь и тем холоднее ты становишься. А твой <strong>Долг перед Маркусом</strong> и его <strong>Отношение к тебе</strong> бот считает скрыто, отражая их через сюжет и поведение Кроу!
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4: EXPANDED CLANS & NPCS -->
+    <!-- ==========================================
+         SECTION 3: ФРАКЦИИ: КТО ВОЮЕТ ЗА НОЧНОЙ ГОРОД?
+         ========================================== -->
+    <section id="factions" class="container">
+        <div class="section-header">
+            <span class="section-tag">Раздел III // Политическая Карта</span>
+            <h2 class="section-title">3. Фракции: Кто воюет за ночной город?</h2>
+            <p style="color: var(--text-main); max-width: 800px; margin: 14px auto 0; font-size: 1.02rem;">
+                Город разделен на сферы влияния между тремя непримиримыми силами и независимыми игроками. В процессе игры ты сможешь сама выбрать, чью сторону занять, на кого работать и кого предать.
+            </p>
+        </div>
+
+        <!-- Word Doc Comparison Table -->
+        <div class="faction-table-wrap">
+            <table class="faction-table">
+                <thead>
+                    <tr>
+                        <th style="width: 24%;">Фракция</th>
+                        <th style="width: 46%;">Идеология и атмосфера</th>
+                        <th style="width: 30%;">Ключевые фигуры в городе</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong style="color: #fff; font-size: 1.1rem; display: block;">Камарилья</strong>
+                            <span style="color: var(--gold-bright); font-size: 0.8rem;">(Башня из слоновой кости)</span>
+                        </td>
+                        <td>
+                            Элитарная неофеодальная секта, которая правит городом из пентхаусов, банков и оперных театров. Жесткая иерархия, власть старейшин, фанатичная защита Маскарада и Традиций. Запрещают обращать новых вампиров без спроса Князя.
+                        </td>
+                        <td>
+                            <span class="npc-tag">Князь Себастьян Делакруа</span>
+                            <span class="npc-tag">Сенешаль Эвелин Росс</span>
+                            <span class="npc-tag">Шериф Вальтер «Гончая» Краузе</span>
+                            <span class="npc-tag">Гарпия Селеста Моро</span>
+                            <span class="npc-tag">Маркус Кроу (чистильщик двора)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong style="color: #fff; font-size: 1.1rem; display: block;">Анархи</strong>
+                            <span style="color: var(--gold-bright); font-size: 0.8rem;">(Свободные улицы)</span>
+                        </td>
+                        <td>
+                            Бунтари, панки и идеалисты, отвергнувшие тиранию старейшин Камарильи. Контролируют рабочие окраины, рейв-клубы («Ржавый Вагон») и портовые доки («Восточный Пирс»). Защищают Маскарад ради выживания, но ненавидят корпоративных кровососов вроде Маркуса.
+                        </td>
+                        <td>
+                            <span class="npc-tag">Барон Реймонд «Рэй» Варгас</span>
+                            <span class="npc-tag">Рокси «Искра» Чен (клуб «Ржавый Вагон»)</span>
+                            <span class="npc-tag">Данте «Пес» Моралес (стая байкеров)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong style="color: #fff; font-size: 1.1rem; display: block;">Шабаш</strong>
+                            <span style="color: var(--gold-bright); font-size: 0.8rem;">(Меч Каина)</span>
+                        </td>
+                        <td>
+                            Фанатичный культ вампирского превосходства, прячущийся в заброшенных промзонах (Мясокомбинат «Харвест»). Считают людей просто скотом, презирают Маскарад и готовят кровавый террор против Камарильи, создавая боевых монстров.
+                        </td>
+                        <td>
+                            <span class="npc-tag">Епископ Мать Инесса (Цимисхи)</span>
+                            <span class="npc-tag">Гидеон «Проповедник» (Ласомбра)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong style="color: #fff; font-size: 1.1rem; display: block;">Независимые</strong>
+                            <span style="color: var(--gold-bright); font-size: 0.8rem;">(Серые кардиналы)</span>
+                        </td>
+                        <td>
+                            Кланы и одиночки, которые торгуют со всеми сторонами конфликта: некроманты-банкиры в доме «Вейн и Сыновья», наемные убийцы и информационные брокеры подземелий на станции-призраке «Сити-Холл».
+                        </td>
+                        <td>
+                            <span class="npc-tag">Кассиан Вейн (некромант и аукционист)</span>
+                            <span class="npc-tag">Лейла аль-Рашид (наемница)</span>
+                            <span class="npc-tag">Иезекииль и Никс (сеть Носферату)</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: КЕМ МОЖЕТ БЫТЬ ТВОЙ ПЕРСОНАЖ? (ПОЛНЫЙ ГИД ПО КЛАНАМ)
+         ========================================== -->
     <section id="clans" class="container">
         <div class="section-header">
-            <span class="section-tag">Акт IV // Энциклопедия Крови</span>
-            <h2 class="section-title">Кланы Вампиров и Представители в Городе</h2>
-            <p style="color: var(--text-muted); max-width: 780px; margin: 12px auto 0;">
-                Кровь твоего Сира определяет твои сверхспособности (Дисциплины) и твое фамильное проклятие. Изучи все <strong>10 кланов</strong> нашего сеттинга, чтобы выбрать, кем будешь ты — и знать, чего ждать от каждого встречного вампира.
+            <span class="section-tag">Раздел IV // Энциклопедия Крови</span>
+            <h2 class="section-title">4. Кем может быть твой персонаж? (Гид по кланам)</h2>
+            <p style="color: var(--text-main); max-width: 820px; margin: 14px auto 0; font-size: 1.02rem;">
+                Клан вампира определяется кровью его Сира. Каждый клан дает уникальные сверхспособности (Дисциплины), свой темперамент и свое фамильное проклятие. Перед началом игры ты можешь сама решить, к какому клану принадлежит твоя героиня (или играть за <strong>Каитиффа</strong> — безклановую одиночку)!
             </p>
         </div>
 
@@ -752,28 +1108,27 @@
             <div class="clan-card" data-category="camarilla">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Вентру (можно заменить на <img src='ventrue.png'>)">
-                            <!-- SVG Crown & Scepter -->
+                        <div class="clan-icon-slot" title="Слот под иконку клана Вентру">
                             <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Вентру (Ventrue)</h3>
-                            <span class="clan-epithet">Клан Королей, Патрициев и Корпоративных Хищников</span>
+                            <span class="clan-epithet">Классические Короли и Корпораты — клан Маркуса Кроу</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Голубая кровь вампирского мира. В древности они были императорами и феодалами, а сегодня управляют инвестиционными банками, ЧОПами и политикой из стеклянных пентхаусов. Вентру искренне верят, что без их железной руки сородичи давно бы уничтожили сами себя. Они не марают руки в уличных драках — они скупают твои долги, подкупают судей и ломают твою волю одним взглядом.
+                            Голубая кровь вампирского мира: аристократы, политики, CEO корпораций и серые кардиналы, которые привыкли править и командовать. В древности они были феодалами, а сегодня контролируют инвестиционные банки и ЧОПы из стеклянных пентхаусов. Вентру не марают руки в уличных драках — они скупают твои долги, подкупают судей и ломают твою волю одним взглядом.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Доминирование:</em> гипнотический контроль разума через прямой взгляд и стирание памяти.<br>
-                            • <em>Присутствие:</em> аура пугающего величия, восхищения или первобытного трепета.<br>
-                            • <em>Стойкость:</em> сверхъестественная живучесть и способность игнорировать боль.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Доминирование:</em> гипноз, приказы взглядом, подавление воли и стирание памяти.<br>
+                            • <em>Присутствие:</em> магнетическое обаяние, восхищение и внушение первобытного трепета.<br>
+                            • <em>Стойкость:</em> непробиваемая физическая и ментальная выносливость.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Избирательный вкус):</strong>
-                            Обычная кровь вызывает у Вентру отторжение. Каждый Вентру может питаться только строго определенным типом жертв (например, у Маркуса Кроу это «кровь несгибаемых» — людей на пике отчаянного сопротивления перед крахом).
+                            <strong>Слабость (Избирательный вкус):</strong>
+                            Обычная кровь вызывает у них отторжение. Каждый Вентру может пить кровь только строго определенного типа людей (например, у Маркуса Кроу это «кровь несгибаемых» — людей на пике яростного сопротивления перед крахом).
                         </div>
                     </div>
                 </div>
@@ -781,7 +1136,7 @@
                     <strong>Представители в нашем городе:</strong>
                     <span class="npc-tag">Маркус Кроу (Глава Crow Holdings)</span>
                     <span class="npc-tag">Эвелин Росс (Сенешаль и Примоген)</span>
-                    <span class="npc-tag">Лукас «Люк» Торн (Беглый неонат)</span>
+                    <span class="npc-tag">Лукас «Люк» Торн (Беглый потомок)</span>
                     <span class="npc-tag">Мадлен Кроу (Пропавший сир Маркуса)</span>
                 </div>
             </div>
@@ -790,28 +1145,27 @@
             <div class="clan-card" data-category="camarilla">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Тореадор">
-                            <!-- SVG Rose -->
+                        <div class="clan-icon-slot" title="Слот под иконку клана Тореадор">
                             <svg viewBox="0 0 24 24"><path d="M12 2C9 2 7 4 7 7c0 2.2 1.5 4 3.5 4.7-.3 1.8-1.5 3.3-3.5 3.3v2c2.2 0 4-1.2 4.8-3 .2 0 .2 8 .2 8h2v-8c.8 1.8 2.6 3 4.8 3v-2c-2 0-3.2-1.5-3.5-3.3C17.5 11 19 9.2 19 7c0-3-2-5-7-5zm0 2c2.8 0 5 1.3 5 3s-2.2 3-5 3-5-1.3-5-3 2.2-3 5-3z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Тореадор (Toreador)</h3>
-                            <span class="clan-epithet">Клан Розы: Гедонисты, Творцы и Светские Палачи</span>
+                            <span class="clan-epithet">Дивы, Гедонисты, Художники и Светские Палачи</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Самые чувственные, ослепительные и ядовитые создания ночи. Тореадоры ближе всех к миру смертных: они держат оперные театры, закрытые арт-галереи, модные дома и богемные притоны. Но за их бархатными улыбками и любовью к искусству скрываются безжалостные интриганы, способные одним пущенным слухом в Элизиуме подписать тебе смертный приговор.
+                            Самые прекрасные, страстные и опасные интриганы мира ночи. Кураторы галерей, светские львицы, музыканты и соблазнители, тонко чувствующие красоту и человеческие слабости. За их бархатными улыбками и любовью к искусству скрываются безжалостные манипуляторы, способные одним пущенным слухом в Элизиуме подписать тебе смертный приговор.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Присутствие:</em> влюбляют в себя толпу или парализуют жертву восторгом.<br>
-                            • <em>Стремительность:</em> нечеловеческая скорость — двигаются быстрее, чем глаз успевает моргнуть.<br>
-                            • <em>Прорицание:</em> обостренные до предела чувства, чтение эмоций и аур.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Присутствие:</em> сводят с ума своей харизмой, влюбляют толпу или парализуют восторгом.<br>
+                            • <em>Стремительность:</em> сверхзвуковая скорость движений и рефлексов.<br>
+                            • <em>Прорицание:</em> чтение ауры, эмоций и обостренные до предела чувства.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Одержимость эстетикой):</strong>
-                            Уродливая обстановка физически угнетает их способности, а столкнувшись с чем-то завораживающе прекрасным (шедевром, музыкой или идеальным рассветом), Тореадор может впасть в оцепенение.
+                            <strong>Слабость (Зависимость от эстетики):</strong>
+                            Могут впадать в транс и оцепенение, засмотревшись на истинную красоту, и болезненно зависят от эстетики окружения — уродливая обстановка угнетает их силы.
                         </div>
                     </div>
                 </div>
@@ -823,32 +1177,31 @@
                 </div>
             </div>
 
-            <!-- 3. BRUJA -->
+            <!-- 3. BRUJAH -->
             <div class="clan-card" data-category="rebels">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Бруха">
-                            <!-- SVG Fist / Lightning -->
+                        <div class="clan-icon-slot" title="Слот под иконку клана Бруха">
                             <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Бруха (Brujah)</h3>
-                            <span class="clan-epithet">Философы-Бунтари, Бунтовщики и Короли Улиц</span>
+                            <span class="clan-epithet">Философы-Бунтари и Уличные Бойцы</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Когда-то они были воинами-мыслителями, но сегодня Бруха — это сжатый кулак в кожаной перчатке, бьющий по витринам корпораций. Их кровь кипит от жажды справедливости, свободы и ненависти к любому ошейнику. Именно Бруха составляют костяк Движения Анархов, защищая рабочие кварталы и порты от загребущих рук Камарильи.
+                            Горячая кровь, кожаные куртки и кулаки, пробивающие бетон. Идеалисты, активисты и прирожденные воины, которые сначала бьют, а потом задают вопросы. Их кровь кипит от жажды свободы и ненависти к любому ошейнику. Именно Бруха составляют костяк Движения Анархов, защищая рабочие кварталы и порты от корпораций Камарильи.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Могущество:</em> сокрушительная физическая мощь (способны пробить кулаком кирпичную стену или поднять машину).<br>
-                            • <em>Стремительность:</em> молниеносные рефлексы в ближнем бою.<br>
-                            • <em>Присутствие:</em> харизма уличного вождя, зажигающая сердца толпы.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Могущество:</em> сокрушительная физическая сила (способны пробить стену или перевернуть авто).<br>
+                            • <em>Стремительность:</em> молниеносная скорость в ближнем бою.<br>
+                            • <em>Присутствие:</em> пламенная харизма уличного вождя.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Пламенный Зверь):</strong>
-                            Их кровь закипает мгновенно. Любая провокация, унижение или несправедливость может тут же столкнуть Бруха в неуправляемое яростное Безумие (Frenzy).
+                            <strong>Слабость (Вспыльчивый Зверь):</strong>
+                            Их кровь закипает мгновенно — они впадают в неуправляемую ярость и Безумие (Frenzy) от малейшего оскорбления, унижения или несправедливости.
                         </div>
                     </div>
                 </div>
@@ -858,68 +1211,31 @@
                 </div>
             </div>
 
-            <!-- 4. LASOMBRA -->
-            <div class="clan-card" data-category="rebels">
-                <div>
-                    <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Ласомбра">
-                            <!-- SVG Shadow / Crown -->
-                            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 0 1 0-16v16z"/></svg>
-                        </div>
-                        <div class="clan-title-block">
-                            <h3>Ласомбра (Lasombra)</h3>
-                            <span class="clan-epithet">Сторожа Бездны, Кукловоды и Повелители Теней</span>
-                        </div>
-                    </div>
-                    <div class="clan-body">
-                        <p>
-                            Темные близнецы Вентру. Если Вентру хотят стоять на троне под софитами, то Ласомбра предпочитают стоять в тени за спиной короля, держа нож у его горла. Это абсолютные социал-дарвинисты, презирающие слабость. Долгое время клан был сердцем Шабаша, но недавно часть прагматичных Ласомбра переметнулась в Камарилью, вызвав ярость своих бывших братьев.
-                        </p>
-                        <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Обливион (Власть над Тенью):</em> призыв осязаемых щупалец мрака из Бездны, шаг сквозь тени и удушение темнотой.<br>
-                            • <em>Доминирование:</em> безжалостное подавление чужого разума.<br>
-                            • <em>Могущество:</em> ледяная сокрушительная сила.
-                        </div>
-                        <div class="clan-meta">
-                            <strong>Клановое проклятие (Искаженное отражение):</strong>
-                            Их душа наполовину принадлежит Бездне. Зеркала не отражают их четко, камеры видеонаблюдения идут помехами, а сенсорные экраны смартфонов и микрофоны сбоят в их руках.
-                        </div>
-                    </div>
-                </div>
-                <div class="clan-npcs">
-                    <strong>Представители в нашем городе:</strong>
-                    <span class="npc-tag">Виктор Кейн (Союзник Маркуса в Камарилье)</span>
-                    <span class="npc-tag">Гидеон «Проповедник» (Фанатик Шабаша)</span>
-                </div>
-            </div>
-
-            <!-- 5. TREMERE -->
+            <!-- 4. TREMERE -->
             <div class="clan-card" data-category="camarilla">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Тремер">
-                            <!-- SVG Octagram / Blood Drop -->
+                        <div class="clan-icon-slot" title="Слот под иконку клана Тремер">
                             <svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Тремер (Tremere)</h3>
-                            <span class="clan-epithet">Узурпаторы, Чернокнижники и Кровавые Маги</span>
+                            <span class="clan-epithet">Кровавые Маги, Ученые и Оккультисты</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Клан оккультных ученых, библиофилов и техно-ведьм, которые относятся к вампирскому проклятию как к точной науке. Они живут в закрытых Капеллах (в нашем городе — <strong>Старая университетская библиотека</strong>), ревниво охраняя секреты Тауматургии. Никто в городе не доверяет Тремерам до конца, но все бегут к ним, когда нужно снять проклятие или вычислить врага по капле крови.
+                            Закрытый клан чернокнижников, ученых и хакеров оккультизма, превративших вампирскую кровь в грозное магическое оружие. Они обитают в защищенных печатями Капеллах (в нашем городе — <strong>Старая университетская библиотека</strong>). Никто не доверяет Тремерам до конца, но все идут к ним, когда нужен защитный амулет или ритуал поиска по капле крови.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Кровавое Чародейство (Тауматургия):</em> способность превращать собственную и чужую кровь в яд, кипятить витэ в жилах врага, ставить охранные печати и проводить ритуалы слежки.<br>
-                            • <em>Прорицание:</em> чтение мыслей и скрытых знаков.<br>
-                            • <em>Доминирование:</em> ментальный гипноз.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Тауматургия / Кровавое Чародейство:</em> кипячение чужой крови взглядом, защитные печати, ритуалы поиска и взлома.<br>
+                            • <em>Доминирование:</em> ментальный гипноз и подчинение.<br>
+                            • <em>Прорицание:</em> чтение скрытых знаков и мыслей.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Ущербная кровь):</strong>
-                            После падения их главной Пирамиды в Вене кровь Тремеров потеряла способность легко привязывать других вампиров Узами Крови, а внутри клана царит жесткая грызня между старыми Регентами и молодыми бунтарями.
+                            <strong>Слабость (Расколотая Пирамида):</strong>
+                            Недоверие со стороны всех остальных кланов, неспособность их крови легко сажать других сородичей на Узы Крови и жесткий контроль со стороны старейшин местной Капеллы.
                         </div>
                     </div>
                 </div>
@@ -930,32 +1246,31 @@
                 </div>
             </div>
 
-            <!-- 6. MALKAVIAN -->
+            <!-- 5. MALKAVIAN -->
             <div class="clan-card" data-category="camarilla">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Малкавиан">
-                            <!-- SVG Broken Mirror / Eye -->
+                        <div class="clan-icon-slot" title="Слот под иконку клана Малкавиан">
                             <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Малкавиан (Malkavian)</h3>
-                            <span class="clan-epithet">Клан Разбитого Зеркала: Провидцы и Безумцы</span>
+                            <span class="clan-epithet">Безумные Оракулы, Провидцы и Сломанные Зеркала</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            При Становлении разум каждого Малкавиана раскалывается вдребезги, подключаясь к таинственной Сети Безумия. Со стороны они могут казаться пугающе спокойными врачами, эксцентричными аналитиками или тихими шизофрениками, но их проклятие дает им пугающую проницательность: они слышат ложь, видят призраков прошлого и знают ответы на вопросы, которые ты еще даже не задала.
+                            Сломанные зеркала вампирского мира. Каждый Малкавиан несет в себе печать безумия (от тихой паранойи, навязчивого счета и голосов в голове до гениальной одержимости), но взамен видит скрытую суть вещей, слышит ложь и предчувствует будущее.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Прорицание:</em> вещие видения, телепатия и чтение остаточных воспоминаний на предметах.<br>
-                            • <em>Доминирование (Помешательство):</em> способность транслировать свои кошмары и безумие прямо в мозг врага.<br>
-                            • <em>Затемнение:</em> умение растворяться в толпе и стирать себя из чужого восприятия.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Помешательство / Доминирование:</em> способность сводить врагов с ума и насылать галлюцинации.<br>
+                            • <em>Затемнение:</em> невидимость в тенях и отвод глаз.<br>
+                            • <em>Прорицание:</em> вещие предчувствия, чтение мыслей и психометрия.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Неизлечимый психоз):</strong>
-                            Каждый Малкавиан страдает от тяжелого психического расстройства (мании, галлюцинаций, навязчивого счета или раздвоения личности), которое обостряется в критические минуты.
+                            <strong>Слабость (Поцелуй Луны):</strong>
+                            Врожденный неизлечимый психоз или навязчивое расстройство, которое резко обостряется в моменты стресса и голода.
                         </div>
                     </div>
                 </div>
@@ -965,39 +1280,73 @@
                 </div>
             </div>
 
-            <!-- 7. GANGREL -->
+            <!-- 6. LASOMBRA -->
             <div class="clan-card" data-category="rebels">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Гангрел">
-                            <!-- SVG Wolf / Claws -->
-                            <svg viewBox="0 0 24 24"><path d="M19 3l-4 4-3-2-3 2-4-4v9c0 5.5 3.8 9.7 9 11 5.2-1.3 9-5.5 9-11V3zm-7 13c-2.2 0-4-1.8-4-4h2c0 1.1.9 2 2 2s2-.9 2-2h2c0 2.2-1.8 4-4 4z"/></svg>
+                        <div class="clan-icon-slot" title="Слот под иконку клана Ласомбра">
+                            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 0 1 0-16v16z"/></svg>
                         </div>
                         <div class="clan-title-block">
-                            <h3>Гангрел (Gangrel)</h3>
-                            <span class="clan-epithet">Дикие Волки, Следопыты и Неукротимые Хищники</span>
+                            <h3>Ласомбра (Lasombra)</h3>
+                            <span class="clan-epithet">Повелители Теней и Безжалостные Дарвинисты</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Вампиры, которые ближе всех к своему внутреннему Зверю. Они презирают душные кабинеты и паркетные интриги Элизиума, предпочитая пустоши, портовые трассы и ночную охоту. Но не стоит считать их просто дикарями: из Гангрелов получаются самые страшные Шерифы, ищейки и командиры боевых стай, от которых невозможно спрятаться.
+                            Хищники, которые считают Вентру слишком мягкими. Мастера шантажа, церковных и криминальных интриг, повелевающие живой бездной. Если Вентру хотят сидеть на троне под софитами, Ласомбра стоят в тени за троном, держа клинок у горла короля.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Превращение (Protean):</em> ночное зрение с горящими глазами, отращивание бритвенных когтей, пробивающих броню, слияние с землей и обращение в волка или летучую мышь.<br>
-                            • <em>Стойкость:</em> звериная живучесть.<br>
-                            • <em>Анимализм:</em> власть над городскими хищниками, воронами и бродячими псами.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Обливион / Власть над Тенью:</em> оживление щупалец тьмы, шаг сквозь тени, удушение мраком.<br>
+                            • <em>Доминирование:</em> жесткое подавление чужого разума.<br>
+                            • <em>Могущество:</em> сокрушительная физическая мощь.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Метка Зверя):</strong>
-                            При каждом срыве в Безумие тело Гангрела временно или навсегда приобретает звериные черты — от волчьих зрачков и рычащего голоса до хищной пластики и заостренных ушей.
+                            <strong>Слабость (Искажение Бездны):</strong>
+                            Их искаженная суть не терпит технологий и отражений — экраны смартфонов и микрофоны сбоят от их пальцев, а камеры и зеркала видят лишь размытый темный силуэт.
+                        </div>
+                    </div>
+                </div>
+                <div class="clan-npcs">
+                    <strong>Представители в нашем городе:</strong>
+                    <span class="npc-tag">Виктор Кейн (Союзник Маркуса в Камарилье)</span>
+                    <span class="npc-tag">Гидеон «Проповедник» (Боевой лидер Шабаша)</span>
+                </div>
+            </div>
+
+            <!-- 7. GANGREL -->
+            <div class="clan-card" data-category="rebels">
+                <div>
+                    <div class="clan-header">
+                        <div class="clan-icon-slot" title="Слот под иконку клана Гангрел">
+                            <svg viewBox="0 0 24 24"><path d="M19 3l-4 4-3-2-3 2-4-4v9c0 5.5 3.8 9.7 9 11 5.2-1.3 9-5.5 9-11V3zm-7 13c-2.2 0-4-1.8-4-4h2c0 1.1.9 2 2 2s2-.9 2-2h2c0 2.2-1.8 4-4 4z"/></svg>
+                        </div>
+                        <div class="clan-title-block">
+                            <h3>Гангрел (Gangrel)</h3>
+                            <span class="clan-epithet">Дикие Волки Окраин и Неукротимые Следопыты</span>
+                        </div>
+                    </div>
+                    <div class="clan-body">
+                        <p>
+                            Одиночки, кочевники и прирожденные охотники, которые презирают душные кабинеты и паркетные интриги Элизиума. Из Гангрелов получаются самые грозные Шерифы, ищейки и вожаки уличных байкерских стай, от которых невозможно уйти живым.
+                        </p>
+                        <div class="clan-meta">
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Превращение (Protean):</em> отращивание бритвенно-острых когтей, горящие в темноте глаза, слияние с землей и превращение в волка или летучую мышь.<br>
+                            • <em>Стойкость:</em> звериная неуязвимость к ранам.<br>
+                            • <em>Анимализм:</em> подчинение городских хищников, псов и ворон.
+                        </div>
+                        <div class="clan-meta">
+                            <strong>Слабость (Метка Зверя):</strong>
+                            При каждом срыве в Безумие тело Гангрела приобретает звериные черты — волчьи зрачки, рычащий тембр голоса, заостренные уши или хищную повадку.
                         </div>
                     </div>
                 </div>
                 <div class="clan-npcs">
                     <strong>Представители в нашем городе:</strong>
                     <span class="npc-tag">Вальтер «Гончая» Краузе (Шериф Камарильи)</span>
-                    <span class="npc-tag">Данте «Пес» Моралес (Главарь байкеров Барона)</span>
+                    <span class="npc-tag">Данте «Пес» Моралес (Главарь стаи Анархов)</span>
                 </div>
             </div>
 
@@ -1005,35 +1354,34 @@
             <div class="clan-card" data-category="camarilla">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Носферату">
-                            <!-- SVG Mask / Web -->
+                        <div class="clan-icon-slot" title="Слот под иконку клана Носферату">
                             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Носферату (Nosferatu)</h3>
-                            <span class="clan-epithet">Канализационные Крысы, Призраки Сети и Брокеры Тайн</span>
+                            <span class="clan-epithet">Призраки Сети, Хакеры и Брокеры Подземелий</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Становление ломает их кости и уродует плоть, навсегда лишая человеческого облика. Но взамен Носферату получили абсолютную монополию на чужие секреты. Они обитают в подземных бункерах и на заброшенных станциях метро (<strong>«Сити-Холл»</strong>), контролируя даркнет, городские камеры и жучки. Вентру и Тореадоры морщатся при их виде, но платят им миллионы за компромат.
+                            Изуродованные проклятием гении шпионажа и информационные брокеры, знающие грязные тайны каждого жителя города. Обитают на заброшенной станции метро <strong>«Сити-Холл»</strong>, контролируя даркнет, камеры наблюдения и подземные коммуникации.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Затемнение:</em> полная невидимость в тенях и способность принимать облик любого другого человека («Маска тысячи лиц»).<br>
-                            • <em>Могущество:</em> чудовищная сила.<br>
-                            • <em>Анимализм:</em> шпионская сеть из тысяч городских крыс и птиц.
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Затемнение:</em> способность становиться полностью невидимыми и принимать чужую внешность («Маска тысячи лиц»).<br>
+                            • <em>Могущество:</em> чудовищная физическая сила.<br>
+                            • <em>Анимализм:</em> шпионская сеть из тысяч крыс и птиц.
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановое проклятие (Отталкивающий облик):</strong>
-                            Их внешность — ходячее нарушение Маскарада. На поверхности они вынуждены носить плотные маски, капюшоны или постоянно поддерживать иллюзию Затемнения.
+                            <strong>Слабость (Чудовищный лик):</strong>
+                            Становление навсегда уродует их плоть. Появление Носферату перед людьми без маски или иллюзии Затемнения — мгновенный прорыв Маскарада.
                         </div>
                     </div>
                 </div>
                 <div class="clan-npcs">
                     <strong>Представители в нашем городе:</strong>
                     <span class="npc-tag">Иезекииль «Червь» (Примоген Носферату)</span>
-                    <span class="npc-tag">Никс (Информационный брокер в LED-маске)</span>
+                    <span class="npc-tag">Никс (Связной брокер в LED-маске)</span>
                 </div>
             </div>
 
@@ -1041,118 +1389,127 @@
             <div class="clan-card" data-category="exotic">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку клана Геката / Бану Хаким">
-                            <!-- SVG Scales / Skull -->
+                        <div class="clan-icon-slot" title="Слот под иконку Геката / Бану Хаким">
                             <svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 5.5 4 10c0 2.8 1.5 5.2 3.8 6.5L8 20h8l.2-3.5C18.5 15.2 20 12.8 20 10c0-4.5-3-8-8-8zm-3 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                         </div>
                         <div class="clan-title-block">
                             <h3>Геката и Бану Хаким</h3>
-                            <span class="clan-epithet">Некроманты Семьи Джованни и Кровавые Судьи</span>
+                            <span class="clan-epithet">Некроманты Джованни и Безмолвные Судьи-Ассасины</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Два самых закрытых и опасных клана города. <strong>Геката (Джованни)</strong> — мафиозная династия банкиров и некромантов, говорящих с призраками убитых и отмывающих капитал через похоронные дома. <strong>Бану Хаким (Ассамиты)</strong> — древний орден безжалостных судей, снайперов и ассасинов, чья магия позволяет убивать других вампиров абсолютно бесшумно.
+                            Независимые силы города. <strong>Геката (Джованни)</strong> — клан некромантов и теневых банкиров, которые допрашивают призраков убитых и отмывают миллионы через похоронный дом «Вейн и Сыновья». <strong>Бану Хаким</strong> — судьи и наемные убийцы, чья магия крови позволяет бесшумно казнить других вампиров.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Геката:</em> Обливион (Некромантия — призыв и допрос духов мертвых), Прорицание, Стойкость.<br>
-                            • <em>Бану Хаким:</em> Кровавое Чародейство (отравление оружия витэ), Стремительность, Затемнение (абсолютная тишина вокруг).
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Геката:</em> Обливион (Некромантия и власть над духами мертвых), Прорицание, Стойкость.<br>
+                            • <em>Бану Хаким:</em> Кровавое Чародейство (ядовитая витэ на клинках), Стремительность, Затемнение (купол тишины).
                         </div>
                         <div class="clan-meta">
-                            <strong>Клановые проклятия:</strong>
-                            Укус Гекаты не приносит жертве эйфории — только мучительную агонию. А Бану Хаким страдают от жажды крови других вампиров (диаблери), рискуя сорваться при виде чужой витэ.
+                            <strong>Слабости:</strong>
+                            Укус Гекаты причиняет жертве страшную боль вместо экстаза, а Бану Хаким одержимы жаждой крови других провинившихся вампиров.
                         </div>
                     </div>
                 </div>
                 <div class="clan-npcs">
                     <strong>Представители в нашем городе:</strong>
-                    <span class="npc-tag">Кассиан Вейн (Геката, дом «Вейн и Сыновья»)</span>
+                    <span class="npc-tag">Кассиан Вейн (Геката, «Вейн и Сыновья»)</span>
                     <span class="npc-tag">Лейла аль-Рашид (Бану Хаким, наемница)</span>
                 </div>
             </div>
 
-            <!-- 10. TZIMISCE & CAITIFF -->
+            <!-- 10. CAITIFF & TZIMISCE -->
             <div class="clan-card" data-category="exotic">
                 <div>
                     <div class="clan-header">
-                        <div class="clan-icon-slot" title="Место под иконку Цимисхи / Каитифф">
-                            <!-- SVG Eclipse / Metamorphosis -->
+                        <div class="clan-icon-slot" title="Слот под иконку Каитифф / Цимисхи">
                             <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
                         </div>
                         <div class="clan-title-block">
-                            <h3>Цимисхи и Каитиффы</h3>
-                            <span class="clan-epithet">Скульпторы Плоти Шабаша и Безклановые Изгои</span>
+                            <h3>Каитифф и Цимисхи</h3>
+                            <span class="clan-epithet">Безклановая Одиночка (Идеально для новичков!) и Драконы Шабаша</span>
                         </div>
                     </div>
                     <div class="clan-body">
                         <p>
-                            Две крайности ночи. <strong>Цимисхи (Драконы)</strong> — чудовищные аристократы Шабаша, перешагнувшие через человеческую мораль: они умеют лепить чужие кости и мышцы, как сырую глину, превращая себя в неземных созданий, а врагов — в живые скульптуры. <strong>Каитиффы</strong> — полная противоположность: молодые вампиры-сироты, у которых по загадочной причине не проявились черты ни одного клана.
+                            Если ты не хочешь привязывать себя к стереотипам ни одного клана, ты можешь быть <strong>Каитиффом</strong> — вампиром, у которого не проявились черты Сира. А на другом полюсе ночи стоят <strong>Цимисхи</strong> — пугающие скульпторы плоти из Шабаша, умеющие лепить чужие кости и мышцы, как глину.
                         </p>
                         <div class="clan-meta">
-                            <strong>Дисциплины (Способности):</strong>
-                            • <em>Цимисхи:</em> Изменчивость (Vicissitude — скульптура плоти и кости), Доминирование, Анимализм.<br>
-                            • <em>Каитифф (Идеальный выбор для свободной игры!):</em> может изучать абсолютно любые Дисциплины по своему выбору и не страдает от кланового проклятия!
+                            <strong>Способности (Дисциплины):</strong>
+                            • <em>Каитифф:</em> может сочетать абсолютно любые Дисциплины на твой вкус!<br>
+                            • <em>Цимисхи:</em> Изменчивость (лепка плоти и кости), Доминирование, Анимализм.
                         </div>
                         <div class="clan-meta">
-                            <strong>Особенность в городе:</strong>
-                            Цимисхи находятся вне закона в Камарилье, а на Каитиффов старейшины смотрят как на «безродных дворняг», что дает им полную свободу менять маски.
+                            <strong>Слабость / Особенность:</strong>
+                            Каитиффы <strong>не страдают от клановых проклятий</strong>, но снобы из Камарильи смотрят на них свысока как на «безродных».
                         </div>
                     </div>
                 </div>
                 <div class="clan-npcs">
                     <strong>Представители в нашем городе:</strong>
+                    <span class="npc-tag">Твоя героиня (Каитифф или любой выбранный клан!)</span>
                     <span class="npc-tag">Мать Инесса (Цимисхи, Епископ Шабаша)</span>
-                    <span class="npc-tag">Твоя героиня (может быть любого клана или Каитиффом!)</span>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- SECTION 5: MARCUS CROW & YOUR START -->
+    <!-- ==========================================
+         SECTION 5: ТВОЯ ЗАВЯЗКА: СДЕЛКА С МАРКУСОМ КРОУ
+         ========================================== -->
     <section id="marcus" class="container">
         <div class="section-header">
-            <span class="section-tag">Акт V // Главная фигура на доске</span>
-            <h2 class="section-title">Маркус Кроу и Твоя Завязка</h2>
+            <span class="section-tag">Раздел V // Главная Фигура и Твой Старт</span>
+            <h2 class="section-title">5. Твоя завязка: Сделка с Маркусом Кроу</h2>
         </div>
 
+        <!-- Full Word Doc Intro Text -->
+        <div class="plot-intro-box">
+            <p>
+                Ты — молодая вампирша (неонат), которую обратили незаконно, без разрешения Князя города Себастьяна Делакруа. По законам Камарильи тебя ждала неминуемая казнь на глазах у всего двора в Гранд-Опере «Орфей»: Шериф Вальтер Краузе уже был готов привести приговор в исполнение.
+            </p>
+            <span class="dramatic-line">Твою жизнь спас один жест из ложи клана Вентру.</span>
+        </div>
+
+        <!-- Marcus Crow Dossier & Rules of Freedom -->
         <div class="marcus-dossier">
             <div class="dossier-grid">
                 <div>
                     <span style="color: var(--crimson-bright); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 600;">
-                        Досье Камарильи // Уровень доступа: Закрытый
+                        КТО ТАКОЙ МАРКУС КРОУ? // Закрытое досье Камарильи
                     </span>
-                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; color: #fff; margin: 6px 0 16px;">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2.65rem; color: #fff; margin: 6px 0 16px;">
                         Маркус Кроу (Marcus Crow)
                     </h3>
                     <p style="color: var(--text-main); margin-bottom: 14px;">
-                        Генеральный директор инвестиционного фонда <strong>Crow Holdings</strong>, хозяин закрытого дарк-джаз лаунжа на крыше <strong>«Высота 44»</strong>, сети клиник <strong>«ВитаНова»</strong> и частной военной компании <strong>«Эгида Секьюрити»</strong>. В иерархии двора он — правая рука Сенешаль и главный «финансовый чистильщик», который деньгами, шантажом и железом латает пробоины в Маскараде.
+                        <strong>Маркус Кроу</strong> — генеральный директор инвестиционного фонда <strong>Crow Holdings</strong>, владелец элитного закрытого клуба <strong>«Высота 44»</strong>, сети клиник <strong>«ВитаНова»</strong> и частной военной компании <strong>«Эгида Секьюрити»</strong>. В Камарилье он служит главным «финансовым чистильщиком» — человеком, который деньгами, шантажом и железом решает проблемы двора.
                     </p>
-                    <p style="color: var(--text-muted); margin-bottom: 14px;">
-                        На вид ему 34 года: высокий, широкоплечий, с вечно напряженной осанкой. Темные волосы с ранней серебристой проседью на висках, чуть искривленная переносица (след уличной юности до обращения), тонкий шрам через левую бровь и тяжелый взгляд серо-зеленых глаз. Он никогда не кричит — чем сильнее он в ярости, тем тише становится его низкий, хрипловатый голос, а верхняя пуговица его рубашки всегда расстегнута, словно ему вечно не хватает воздуха.
+                    <p style="color: var(--text-main); margin-bottom: 14px;">
+                        На вид ему 34 года: высокий, с широкими плечами, серебристой проседью в темных волосах, чуть искривленной переносицей, тонким шрамом через левую бровь и тяжелым взглядом серо-зеленых глаз. Он никогда не повышает тон — чем сильнее он в ярости, тем тише становится его низкий голос, а верхняя пуговица его рубашки всегда расстегнута, словно ему вечно не хватает воздуха. Это холодный, саркастичный прагматик, за бронированным фасадом которого прячутся смертельные тайны, собственные демоны и опасная война на два фронта — против Князя Делакруа и Барона Анархов.
                     </p>
                     <div class="quote-box">
-                        «Я не твой новый сир, не твоя нянька и уж точно не собираюсь сажать тебя на поводок Уз Крови. Но когда зазвонит этот телефон — ты поднимешь трубку и отработаешь каждый цент, который я сегодня вложил в твою голову».
+                        «Я не твой новый сир, не твоя нянька и уж точно не собираюсь сажать тебя на поводок Уз Крови. Но за то, что твоя голова все еще держится на плечах, за тобой числится долг чести. Когда этот телефон зазвонит — ты поднимешь трубку и отработаешь каждый цент, который я сегодня вложил в твое спасение перед Делакруа».
                     </div>
                 </div>
 
-                <div style="background: rgba(5, 4, 6, 0.75); border: 1px solid var(--border-subtle); padding: 28px; border-radius: 4px;">
-                    <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #fff; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
-                        Твоя роль на старте игры:
+                <div style="background: rgba(5, 4, 6, 0.78); border: 1px solid var(--border-subtle); padding: 30px; border-radius: 6px;">
+                    <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; color: #fff; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+                        Что происходит на старте и в чем твоя свобода?
                     </h4>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 0.9rem; color: var(--text-muted);">
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 18px; font-size: 0.93rem; color: var(--text-main);">
                         <li>
-                            <strong style="color: #fff;">🩸 Спасение с эшафота:</strong> Тебя обратили незаконно, и в Гранд-Опере «Орфей» Шериф Краузе уже занес клинок над твоей шеей. Маркус Кроу выкупил твою жизнь у Князя Делакруа в счет политических долгов.
+                            <strong style="color: var(--crimson-bright); font-size: 1rem; display: block; margin-bottom: 3px;">🗝️ Ты не рабыня:</strong>
+                            Маркус выкупил твою жизнь у Князя в счет политических долгов, но он не посадил тебя на поводок Уз Крови и не запер в клетке. Он дал тебе ключи от собственной квартиры в паре кварталов от клуба «Высота 44» и черный смартфон для связи.
                         </li>
                         <li>
-                            <strong style="color: #fff;">🗝️ Полная свобода без ошейника:</strong> Маркус не запирает тебя в своем пентхаусе «Обелиск». Он дает тебе ключ-карту от отдельной квартиры, черный смартфон и полную свободу гулять по городу, охотиться и выбирать союзников.
+                            <strong style="color: var(--crimson-bright); font-size: 1rem; display: block; margin-bottom: 3px;">🌃 Открытый мир и квесты:</strong>
+                            Ты вольна идти куда угодно — исследовать ночной город, знакомиться с Анархами в клубе «Ржавый Вагон», торговаться с ведьмами-Тремерами в библиотеке или охотиться в переулках. Но на тебе висит официальный Долг Чести перед Маркусом: когда он звонит, ты выполняешь его деликатные поручения (или берешь контракты у других вампиров, торгуясь за награду).
                         </li>
                         <li>
-                            <strong style="color: #fff;">📜 Система Контрактов:</strong> На тебе висит официальный Долг Чести. Ты можешь выполнять поручения Маркуса, брать заказы у других вампиров, торговаться за награду или вести двойную игру.
-                        </li>
-                        <li>
-                            <strong style="color: #fff;">🔒 Скелеты в шкафу:</strong> За бронированным фасадом Маркуса прячутся тяжелые психологические травмы и смертельная тайна, способная отправить его на плаху. Он никогда не откроет их просто так — но ты можешь раскопать улики или пробить его ледяную защиту.
+                            <strong style="color: var(--crimson-bright); font-size: 1rem; display: block; margin-bottom: 3px;">🔒 Охота за секретами:</strong>
+                            У Маркуса Кроу есть тщательно спрятанные уязвимости и скелеты в шкафу, способные обрушить его империю. Он никогда не расскажет о них просто так — но ты можешь раскопать улики, подловить его в момент слабости или шаг за шагом пробить его ледяную броню, став единственной, кому он доверит свою жизнь.
                         </li>
                     </ul>
                 </div>
@@ -1161,9 +1518,9 @@
     </section>
 
     <footer>
-        <div class="rose-divider" style="margin-bottom: 20px;">🌹</div>
+        <div class="rose-divider" style="margin-bottom: 22px;">🌹</div>
         <p><strong>VAMPIRE: THE MASQUERADE // CROW CHRONICLES</strong></p>
-        <p style="margin-top: 6px; opacity: 0.6;">Создано специально для текстовой ролевой игры. Помни о Маскараде и следи за рассветом.</p>
+        <p style="margin-top: 6px; opacity: 0.65;">Полный путеводитель по ночному городу. Помни о Маскараде, следи за Голодом и не оставайся на улице перед рассветом.</p>
     </footer>
 
     <script>
